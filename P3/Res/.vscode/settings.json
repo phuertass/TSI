@@ -1,0 +1,3 @@
+{
+    "pddlParser.executableOptions": "-o $(domain) -f $(problem)"
+}
