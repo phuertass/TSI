@@ -1,0 +1,301 @@
+
+/*
+    	if(busca_camino) {
+    		System.out.println("SE ESTA BUSCANDO CAMINO");
+    	
+	    	//Portal es el destino
+	    	//System.out.println(portal.toString());
+	    	
+	    	//Avatar es el origen
+	    	Nodo current = new Nodo(avatar);
+	    	
+	    	current.padre= null;
+	    	current.secuencia=null;
+	    	current.visitado=false;
+	    	current.accion=null;
+	    	 
+	    	cola.addFirst(current); 
+	    	
+	    	while(cola.size()!=0 && busca_camino)
+	    	{
+	    		System.out.println("ENTRA BUCLE");
+	    		//Elimino el primer elemento de la cola
+	    		cola.removeLast();
+	    		
+	    		if(!current.visitado)
+	    		{
+	    			
+	    			current.visitado=true;
+	    			//EXPANDIR HIJOS EN ESE ORDEN
+	    			if(current.posicion.y-1>=0)
+	    			{
+	    				Nodo hijo = Nodo.generaHijoArriba(current);
+	    				//hijo.secuencia = current.secuencia;
+	    				System.out.println(hijo.secuencia);
+	    				hijo.secuencia.addFirst(hijo.accion);
+	    				System.out.println(hijo.secuencia);
+	    			
+		    			cola.addFirst(hijo);
+		    			
+	    			}
+	    			System.out.println("lol");
+	    			
+	    			if(current.posicion.y + 1 <= stateObs.getObservationGrid()[0].length-1) {
+	    				Nodo hijoabajo = Nodo.generaHijoAbajo(current);
+	    				//hijoabajo.secuencia = current.secuencia;
+	    				System.out.println(hijoabajo.secuencia);
+	    				hijoabajo.secuencia.addFirst(hijoabajo.accion);
+	    				System.out.println(hijoabajo.secuencia);
+		    			cola.addFirst(hijoabajo);
+	    			}
+	    			
+	    			if(current.posicion.x-1 >= 0)
+	    			{
+	    				Nodo hijoizquierda = Nodo.generaHijoIzquierda(current);
+	    				//hijoizquierda.secuencia = current.secuencia;
+	    				System.out.println(hijoizquierda.secuencia);
+	    				hijoizquierda.secuencia.addFirst(hijoizquierda.accion);
+	    				System.out.println(hijoizquierda.secuencia);
+	    				cola.addFirst(hijoizquierda);
+	    			}
+	    			
+	    			if(current.posicion.x+1 <= stateObs.getObservationGrid().length-1)
+	    			{
+	    				Nodo hijoderecha = Nodo.generaHijoDerecha(current);
+	    				//hijoderecha.secuencia = current.secuencia;
+	    				System.out.println(hijoderecha.secuencia);
+	    				hijoderecha.secuencia.addFirst(hijoderecha.accion);
+	    				System.out.println(hijoderecha.secuencia);
+		    			cola.addFirst(hijoderecha);
+	    			}
+	    			
+	    			
+	        		
+	    			current=cola.removeLast();
+	    			while(current.visitado)
+	    				current=cola.removeLast();
+	    			
+	    			if(current.posicion.equals(portal))
+	    			{
+	    				
+	    				busca_camino=false;
+	    				encontrado = true;
+	    				//secuenciafin = current.secuencia;
+	    				System.out.println("CAMINO ENCONTRADO");
+	    				
+	    				camino = current.secuencia;
+	    				
+	    				
+	    			}
+	        		
+	        		
+	    		}
+		    	
+		    	
+	    	}
+    	}
+    	
+    	
+    }*/
+
+
+
+/*
+public class Nodo extends Node{
+	//ArrayList<Types.ACTIONS> secuencia;
+	//Queue<Types.ACTIONS> secuencia = new Queue<>();
+	LinkedList<ACTIONS> secuencia = new LinkedList<ACTIONS>();
+	boolean visitado;
+	Types.ACTIONS accion;
+	Vector2d posicion = new Vector2d();
+	Nodo padre;
+	
+	
+	public Nodo() {
+		padre = null;
+		//secuencia = new ArrayList<Types.ACTIONS>();
+		visitado = false;
+		accion = Types.ACTIONS.ACTION_NIL;
+		//posicion = new Vector2d();
+	}
+	public Nodo(Vector2d pos) {
+		padre = null;
+		//secuencia = new ArrayList<Types.ACTIONS>();
+		visitado = false;
+		accion = Types.ACTIONS.ACTION_NIL;
+		posicion = pos;
+	}
+	
+	public static Nodo generaHijoArriba(Nodo current)
+	{
+		Nodo hijo = new Nodo(current.posicion);
+		hijo.padre = current;
+		hijo.accion=Types.ACTIONS.ACTION_UP;
+		hijo.visitado=false;
+		//hijo.secuencia = new ArrayList<Types.ACTIONS>();
+		hijo.secuencia = current.secuencia;
+		//hijo.secuencia.add(Types.ACTIONS.ACTION_UP);
+		hijo.secuencia.addFirst(Types.ACTIONS.ACTION_UP);
+		hijo.posicion.x=current.posicion.x;
+		hijo.posicion.y=current.posicion.y-1;
+		
+		return hijo;
+	}
+	
+	public static Nodo generaHijoAbajo(Nodo current)
+	{
+		Nodo hijo = new Nodo();
+		hijo.padre = current;
+		hijo.accion=Types.ACTIONS.ACTION_DOWN;
+		hijo.visitado=false;
+		hijo.secuencia = current.secuencia;
+		hijo.secuencia.addFirst(Types.ACTIONS.ACTION_DOWN);
+		hijo.posicion.x=current.posicion.x;
+		hijo.posicion.y=current.posicion.y+1;
+		
+		return hijo;
+	}
+	
+	
+	
+	public static Nodo generaHijoIzquierda(Nodo current)
+	{
+		Nodo hijo = new Nodo();
+		hijo.padre = current;
+		hijo.accion=Types.ACTIONS.ACTION_LEFT;
+		hijo.visitado=false;
+		hijo.secuencia = current.secuencia;
+		hijo.secuencia.addFirst(Types.ACTIONS.ACTION_LEFT);
+		hijo.posicion.x=current.posicion.x-1;
+		hijo.posicion.y=current.posicion.y;
+		
+		return hijo;
+	}
+	
+
+	public static Nodo generaHijoDerecha(Nodo current)
+	{
+		Nodo hijo = new Nodo();
+		hijo.padre = current;
+		hijo.accion=Types.ACTIONS.ACTION_RIGHT;
+		hijo.visitado=false;
+		hijo.secuencia = current.secuencia;
+		hijo.secuencia.addFirst(Types.ACTIONS.ACTION_RIGHT);
+		hijo.posicion.x=current.posicion.x+1;
+		hijo.posicion.y=current.posicion.y;
+		
+		return hijo;
+	}
+	
+	
+}*/
+
+
+while(!cola.isEmpty())
+		{
+			
+			current = cola.poll();
+			
+			
+			//Genera hijos arriba,abajo,izquierda,derecha
+			if(current.visitado==false) {
+				current.visitado = true;
+				hijos = path.getNeighbours(current);
+				System.out.println("NUM HIJOS GENERADOS\n"+hijos.size());
+				for(int i=0; i<hijos.size(); i++) {
+					Nodo hijo = new Nodo(hijos.get(i).position, current);
+					//hijo.parent = current;
+					cola.add(hijo); 
+				}
+				
+				current = cola.poll();
+				while(current.visitado)
+					current=cola.poll();
+				
+				if(current.position.equals(portal))
+					camino_encontrado = true;
+			}
+		}
+
+
+		while(!cola.isEmpty() && !current.position.equals(portal) && !camino_encontrado)
+		{
+			
+			current = cola.poll();
+			while(current.visitado) {
+				current=cola.poll();
+				
+			}
+			
+			
+			//Genera hijos arriba,abajo,izquierda,derecha
+			if(current.visitado==false){
+				current.visitado = true;
+				if(current.position.y-1>=0)
+				{
+					Vector2d nuevaposicionar = new Vector2d(current.position.x, current.position.y-1);
+					Nodo hijoarriba = new Nodo(nuevaposicionar, current, current.secuencia);
+					hijoarriba.accion = ACTIONS.ACTION_UP;
+					hijoarriba.secuencia.addLast(ACTIONS.ACTION_UP);
+	    			cola.add(hijoarriba);
+	    			if(hijoarriba.position.x==portal.x && hijoarriba.position.y==portal.y)
+					{
+						camino_encontrado = true;
+						camino = hijoarriba.secuencia;
+					}
+					
+				}
+				if(current.position.y + 1 <= stateObs.getObservationGrid()[0].length-1) {
+					Vector2d nuevaposicionab = new Vector2d(current.position.x, current.position.y+1);
+    				Nodo hijoabajo = new Nodo(nuevaposicionab, current, current.secuencia);
+    				hijoabajo.accion = ACTIONS.ACTION_DOWN;
+    				hijoabajo.secuencia.addLast(ACTIONS.ACTION_DOWN);
+	    			cola.add(hijoabajo);
+	    			if(hijoabajo.position.x==portal.x && hijoabajo.position.y==portal.y)
+					{
+						camino_encontrado = true;
+						camino = hijoabajo.secuencia;
+					}
+    			}
+				if(current.position.x-1 >= 0) {
+					Vector2d nuevaposicioniz = new Vector2d(current.position.x-1, current.position.y);
+    				Nodo hijoizquierda = new Nodo(nuevaposicioniz, current, current.secuencia);
+    				hijoizquierda.accion = ACTIONS.ACTION_LEFT;
+    				hijoizquierda.secuencia.addLast(ACTIONS.ACTION_LEFT);
+	    			cola.add(hijoizquierda);
+	    			if(hijoizquierda.position.x==portal.x && hijoizquierda.position.y==portal.y)
+					{
+						camino_encontrado = true;
+						camino = hijoizquierda.secuencia;
+					}
+    			}
+				if(current.position.x+1 <= stateObs.getObservationGrid().length-1)
+    			{
+					Vector2d nuevaposiciondcha = new Vector2d(current.position.x+1, current.position.y);
+    				Nodo hijoderecha = new Nodo(nuevaposiciondcha, current, current.secuencia);
+    				hijoderecha.accion = ACTIONS.ACTION_RIGHT;
+    				hijoderecha.secuencia.addLast(ACTIONS.ACTION_RIGHT);
+	    			cola.add(hijoderecha);
+	    			if(hijoderecha.position.x==portal.x && hijoderecha.position.y==portal.y)
+					{
+						camino_encontrado = true;
+						camino = hijoderecha.secuencia;
+					}
+    			}
+				
+				
+				
+				if(current.position.equals(portal))
+				{
+					camino_encontrado = true;
+					camino = current.secuencia;
+				}
+					
+				
+			}
+		}
+		System.out.println(camino_encontrado);
+		
+		return camino;
+		
+	};
