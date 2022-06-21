@@ -1,0 +1,10 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}\large {Problema de las monedas}}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Apartado a}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Apartado b}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Apartado c}{4}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Cuestiones}{5}{subsection.1.4}%
+\contentsline {section}{\numberline {2}\large {Problema de los horarios}}{6}{section.2}%
+\contentsline {section}{\numberline {3}\large {Problema lógico}}{8}{section.3}%
+\contentsline {section}{\numberline {4}\large {Problema de asignación de tareas}}{9}{section.4}%
+\contentsline {section}{\numberline {5}\large {Problema del coloreado de grafos}}{10}{section.5}%
